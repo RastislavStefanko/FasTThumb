@@ -1,0 +1,27 @@
+Initialize engine version: 5.3.6f1 (29055738eb78)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 755M (ID=0xfcd)
+    Vendor:   NVIDIA
+    VRAM:     1952 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.045 seconds
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Rasto\School\unity learning\MyGame\myGame_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.129934 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1da4 -> priority: 1 
+  Thread -> id: 2c70 -> priority: 1 
