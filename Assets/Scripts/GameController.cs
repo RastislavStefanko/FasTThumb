@@ -19,15 +19,16 @@ public class GameController : MonoBehaviour {
 	
 	}
 
+
+    //each spawnTime time is spawn one wall
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(startTime);
         while (true)
         {
 
-                Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), Random.Range(36, 49), spawnValues.z);
-                Quaternion spawnRotation = Quaternion.identity;
-                Instantiate(wall, spawnPosition, spawnRotation);
+                Vector3 spawnPosition = new Vector3(0, 0, spawnValues.z);
+                Instantiate(wall, spawnPosition, wall.transform.rotation);
                 yield return new WaitForSeconds(spawnTime);
 
         }
