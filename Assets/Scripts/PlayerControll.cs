@@ -42,25 +42,28 @@ public class PlayerControll : MonoBehaviour {
                 }
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    //player moving
-                    if (CheckRaycastHit(ray1) == whatSide)
+                    if (touch1Duration > 0.2f)
                     {
-                        if (whatSide == 0)
+                        //player moving
+                        if (CheckRaycastHit(ray1) == whatSide)
                         {
-                            MovePlayer(touch, true);
-                        }
-                        else
-                        {
-                            MovePlayer(touch, false);
+                            if (whatSide == 0)
+                            {
+                                MovePlayer(touch, true);
+                            }
+                            else
+                            {
+                                MovePlayer(touch, false);
+                            }
                         }
                     }
 
                 }
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    if (touch1Duration < 0.25f)
-                    {   
-                        StartCoroutine(singleOrDouble(whatSide, touch)); // start coroutine to check on single tap
+                    if (touch1Duration < 0.3f)
+                    {
+                        singleOrDouble(whatSide, touch); // start coroutine to check on single tap
                     }
                     touch1Duration = 0;
                 }
@@ -82,26 +85,29 @@ public class PlayerControll : MonoBehaviour {
 
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    if (CheckRaycastHit(ray2) == whatSide2)
+                    if (touch2Duration > 0.2f)
                     {
-                        if (whatSide2 == 0)
+                        if (CheckRaycastHit(ray2) == whatSide2)
                         {
-                            MovePlayer(touch, true);
-                        }
-                        else
-                        {
-                            MovePlayer(touch, false);
+                            if (whatSide2 == 0)
+                            {
+                                MovePlayer(touch, true);
+                            }
+                            else
+                            {
+                                MovePlayer(touch, false);
+                            }
                         }
                     }
 
                 }
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    if (touch2Duration < 0.25f)
+                    if (touch2Duration < 0.3f)
                     {
-                        StartCoroutine(singleOrDouble(whatSide2, touch));
+                        singleOrDouble(whatSide2, touch);
                     }
-                    touch2Duration = 0;
+                        touch2Duration = 0;
                 }
             }
         }
@@ -154,36 +160,38 @@ public class PlayerControll : MonoBehaviour {
     }
 
     //coroutine on tap and double tap
-    IEnumerator singleOrDouble(int side, Touch touchCheck)
+    void singleOrDouble(int side, Touch touchCheck)
     {
-        yield return new WaitForSeconds(0.1f);
-            if (side == 0)
-            {
-                leftPlayers[leftCounter].SetActive(false);
-                if (leftCounter >= 1)
-                {
-                    leftCounter = 0;
-                }
-                else
-                {
-                    leftCounter++;
-                }
-                leftPlayers[leftCounter].SetActive(true);
-            }
-            else
-            {
-                rightPlayers[rightCounter].SetActive(false);
-                if (rightCounter >= 1)
-                {
-                    rightCounter = 0;
-                }
-                else
-                {
-                    rightCounter++;
-                }
-                rightPlayers[rightCounter].SetActive(true);
-            }
-            StopCoroutine("singleOrDouble");
+
+        if (side == 0)
+        {
+                    leftPlayers[leftCounter].SetActive(false);
+                    if (leftCounter >= 1)
+                    {
+                        leftCounter = 0;
+                    }
+                    else
+                    {
+                        leftCounter++;
+                    }
+                    leftPlayers[leftCounter].SetActive(true);
+        }
+        else
+        {
+
+                    rightPlayers[rightCounter].SetActive(false);
+                    if (rightCounter >= 1)
+                    {
+                        rightCounter = 0;
+                    }
+                    else
+                    {
+                        rightCounter++;
+                    }
+                    rightPlayers[rightCounter].SetActive(true);
+               
+            
+        }
         
     }
 }
