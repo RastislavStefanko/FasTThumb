@@ -8,6 +8,12 @@ public class GameController : MonoBehaviour {
     public float spawnTime;
     public float startTime;
 
+    private int side;
+    private Color color;
+
+    public GameObject[] leftPlayers;
+    public GameObject[] rightPlayers;
+
     // Use this for initialization
     void Start()
     {
@@ -26,11 +32,46 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(startTime);
         while (true)
         {
+            //randomize side and colour
+            side = Random.Range(0, 2);
+            color = new Color(Random.Range(0.0f,1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
 
-                Vector3 spawnPosition = new Vector3(0, 0, spawnValues.z);
-                Instantiate(wall, spawnPosition, wall.transform.rotation);
-                yield return new WaitForSeconds(spawnTime);
+            //give player opposite colour to wall 
+            switch (side)
+            {
+                case 0:
+                    spawnValues.x = -16;
+                    for(int i = 0; i < leftPlayers.Length; i++)
+                    {
+                        leftPlayers[i].GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                    }
+                    break;
+                case 1:
+                    spawnValues.x = 16;
+                    for (int i = 0; i < rightPlayers.Length; i++)
+                    {
+                        rightPlayers[i].GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            Vector3 spawnPosition = new Vector3(spawnValues.x, 0, spawnValues.z);
+            GameObject instantiateWall = Instantiate(wall, spawnPosition, wall.transform.rotation);
+            instantiateWall.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(spawnTime);
 
         }
+    }
+
+    public int getSide()
+    {
+        return side;
+    }
+
+    public Color getColor()
+    {
+        return color;
     }
 }

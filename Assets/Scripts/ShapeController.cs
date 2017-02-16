@@ -6,6 +6,8 @@ public class ShapeController : MonoBehaviour
     public GameObject shadow;
     public GameObject canvas;
 
+    public GameObject[] destroyAnimation;
+
     void Update()
     {
         RaycastHit hit;
@@ -31,6 +33,20 @@ public class ShapeController : MonoBehaviour
     {
         if(other.transform.tag == "Enemy")
         {
+            //on destroy instantiate object with destroy animation and give him target colour
+            GameObject tmp;
+            if (other.transform.parent.position.x < 0)
+            {
+                tmp = Instantiate(destroyAnimation[0], other.transform.parent.transform.position, destroyAnimation[0].transform.rotation);
+            }
+            else
+            {
+                tmp = Instantiate(destroyAnimation[1], other.transform.parent.transform.position, destroyAnimation[1].transform.rotation);
+            }
+            foreach (Transform child in tmp.transform)
+            {
+                child.GetComponent<SpriteRenderer>().color = other.transform.parent.GetComponent<SpriteRenderer>().color;
+            }
             Destroy(other.transform.parent.gameObject);
         }
 
