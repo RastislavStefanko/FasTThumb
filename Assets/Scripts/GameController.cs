@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -14,6 +15,9 @@ public class GameController : MonoBehaviour {
     public GameObject[] leftPlayers;
     public GameObject[] rightPlayers;
 
+    private int score = 0;
+    public Text scoreText; 
+
     // Use this for initialization
     void Start()
     {
@@ -22,8 +26,18 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	
-	}
+
+        //adding score and show in scoreText
+        for (int i = 0; i < leftPlayers.Length; i++)
+        {
+            score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
+            score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
+            leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+        }
+
+        scoreText.text = "" + score;
+    }
 
 
     //each spawnTime time is spawn one wall

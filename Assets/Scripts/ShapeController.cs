@@ -8,6 +8,8 @@ public class ShapeController : MonoBehaviour
 
     public GameObject[] destroyAnimation;
 
+    private int point = 0;
+
     void Update()
     {
         RaycastHit hit;
@@ -47,6 +49,8 @@ public class ShapeController : MonoBehaviour
             {
                 child.GetComponent<SpriteRenderer>().color = other.transform.parent.GetComponent<SpriteRenderer>().color;
             }
+            //add points
+            point += 20;
             Destroy(other.transform.parent.gameObject);
         }
 
@@ -58,4 +62,13 @@ public class ShapeController : MonoBehaviour
         }
     }
 
+    public int getPoints()
+    {
+        return point;
+    }
+
+    public void setPointsToZero()
+    {
+        point = 0;
+    }
 }

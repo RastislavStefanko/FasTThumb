@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 804a335d5c045574f8a78a0ee95dad40
+timeCreated: 1487359940
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Carbon
+  fontNames:
+  - Carbon
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
