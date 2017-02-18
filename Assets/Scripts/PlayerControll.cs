@@ -179,7 +179,7 @@ public class PlayerControll : MonoBehaviour {
         else
         {
 
-                    rightPlayers[rightCounter].SetActive(false);
+                    rightPlayers[rightCounter].GetComponent<Animator>().SetBool("changeShape", true);
                     if (rightCounter >= 1)
                     {
                         rightCounter = 0;
@@ -188,7 +188,7 @@ public class PlayerControll : MonoBehaviour {
                     {
                         rightCounter++;
                     }
-                    rightPlayers[rightCounter].SetActive(true);
+                    //rightPlayers[rightCounter].SetActive(true);
                
             
         }

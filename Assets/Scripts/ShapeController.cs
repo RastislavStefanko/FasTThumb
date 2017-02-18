@@ -8,6 +8,8 @@ public class ShapeController : MonoBehaviour
 
     public GameObject[] destroyAnimation;
 
+    public GameObject nextShape;
+
     private int point = 0;
 
     void Update()
@@ -70,5 +72,12 @@ public class ShapeController : MonoBehaviour
     public void setPointsToZero()
     {
         point = 0;
+    }
+
+    public void setNextShape()
+    {
+        nextShape.SetActive(true);
+        nextShape.gameObject.GetComponent<Animator>().SetBool("changeShape", false);
+        gameObject.SetActive(false);
     }
 }
