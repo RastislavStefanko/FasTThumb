@@ -165,32 +165,35 @@ public class PlayerControll : MonoBehaviour {
 
         if (side == 0)
         {
-                    leftPlayers[leftCounter].SetActive(false);
-                    if (leftCounter >= 1)
-                    {
-                        leftCounter = 0;
-                    }
-                    else
-                    {
-                        leftCounter++;
-                    }
-                    leftPlayers[leftCounter].SetActive(true);
+            //check if animator is ready, and play animation which on its end set new shape active
+            if (leftPlayers[leftCounter].GetComponent<Animator>().isActiveAndEnabled)
+            {
+                leftPlayers[leftCounter].GetComponent<Animator>().SetBool("changeShape", true);
+                if (leftCounter >= 1)
+                {
+                    leftCounter = 0;
+                }
+                else
+                {
+                    leftCounter++;
+                }
+            }
         }
         else
         {
-
-                    rightPlayers[rightCounter].GetComponent<Animator>().SetBool("changeShape", true);
-                    if (rightCounter >= 1)
-                    {
-                        rightCounter = 0;
-                    }
-                    else
-                    {
-                        rightCounter++;
-                    }
-                    //rightPlayers[rightCounter].SetActive(true);
-               
-            
+            //same as above
+            if (rightPlayers[rightCounter].GetComponent<Animator>().isActiveAndEnabled)
+            {
+                rightPlayers[rightCounter].GetComponent<Animator>().SetBool("changeShape", true);
+                if (rightCounter >= 1)
+                {
+                    rightCounter = 0;
+                }
+                else
+                {
+                    rightCounter++;
+                }
+            }
         }
         
     }

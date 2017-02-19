@@ -30,10 +30,16 @@ public class GameController : MonoBehaviour {
         //adding score and show in scoreText
         for (int i = 0; i < leftPlayers.Length; i++)
         {
-            score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
-            score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
-            leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
-            rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            if (leftPlayers[i] != null)
+            {
+                score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
+                leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            }
+            if (rightPlayers[i] != null)
+            {
+                score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
+                rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            }
         }
 
         scoreText.text = "" + score;
