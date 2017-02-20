@@ -34,14 +34,14 @@ public class Mover : MonoBehaviour {
         switch (right)
         {
             case 0:
-                spawnPosition = new Vector3(Random.Range(-spawnValues.x, 0), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
+                spawnPosition = new Vector3(Random.Range(-spawnValues.x, -2), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
                 enemy = Instantiate(enemies[whichShape], spawnPosition, enemies[whichShape].transform.rotation);
                 newColor = gameControl.getColor();
                 enemy.GetComponent<SpriteRenderer>().color = new Color(1 - newColor.r, 1 - newColor.g, 1 - newColor.b);
                 enemy.transform.parent = transform;
                 break;
             case 1:
-                spawnPosition = new Vector3(Random.Range(0, spawnValues.x), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
+                spawnPosition = new Vector3(Random.Range(2, spawnValues.x), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
                 enemy = Instantiate(enemies[whichShape], spawnPosition, enemies[whichShape].transform.rotation);
                 newColor = gameControl.getColor();
                 enemy.GetComponent<SpriteRenderer>().color = new Color(1 - newColor.r, 1 - newColor.g, 1 - newColor.b);

@@ -127,13 +127,19 @@ public class PlayerControll : MonoBehaviour {
         //move all object in same direction
         if (left)
         {
-            leftPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
-            leftPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+            if (leftPlayers[0] != null && leftPlayers[1] != null)
+            {
+                leftPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+                leftPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+            }
         }
         else
         {
-            rightPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
-            rightPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+            if (rightPlayers[0] != null && rightPlayers[1] != null)
+            {
+                rightPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+                rightPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+            }
         }
     }
 

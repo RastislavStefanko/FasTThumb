@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SwitchScenesController : MonoBehaviour {
 
-    public string directScene;
+    //public string directScene;
     public GameObject pauseCanvas;
 
-    public void LoadScene()
+    public void LoadScene(string directScene)
     {
         Time.timeScale = 1;
         Application.LoadLevel(directScene);

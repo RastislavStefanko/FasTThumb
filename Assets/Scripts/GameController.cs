@@ -16,7 +16,12 @@ public class GameController : MonoBehaviour {
     public GameObject[] rightPlayers;
 
     private int score = 0;
-    public Text scoreText; 
+    public Text scoreText;
+    public Text finalScoreText;
+
+    public Text playerName;
+
+    private bool end = false;
 
     // Use this for initialization
     void Start()
@@ -43,11 +48,32 @@ public class GameController : MonoBehaviour {
         }
 
         scoreText.text = "" + score;
+
+        for (int i = 0; i < leftPlayers.Length; i++)
+        {
+            if (leftPlayers[i] == null)
+            {
+                end = true;
+            }
+            if (rightPlayers[i] == null)
+            {
+                end = true;
+            }
+        }
+
+        if (end)
+        {
+            TouchScreenKeyboard.Open(playerName.text, TouchScreenKeyboardType.Default);
+            finalScoreText.text = "" + score;
+            if(score >= PlayerPrefs.GetInt("highScore"))
+            {
+                PlayerPrefs.SetInt("highScore", score);
+            }
+        }
     }
 
-
-    //each spawnTime time is spawn one wall
-    IEnumerator SpawnWaves()
+        //each spawnTime time is spawn one wall
+        IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(startTime);
         while (true)
@@ -93,5 +119,10 @@ public class GameController : MonoBehaviour {
     public Color getColor()
     {
         return color;
+    }
+
+    public int getScore()
+    {
+        return score;
     }
 }
