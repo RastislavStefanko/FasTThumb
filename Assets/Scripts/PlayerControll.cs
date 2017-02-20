@@ -51,7 +51,7 @@ public class PlayerControll : MonoBehaviour {
                             {
                                 MovePlayer(touch, true);
                             }
-                            else
+                            else if(whatSide == 1)
                             {
                                 MovePlayer(touch, false);
                             }
@@ -93,7 +93,7 @@ public class PlayerControll : MonoBehaviour {
                             {
                                 MovePlayer(touch, true);
                             }
-                            else
+                            else if(whatSide2 == 1)
                             {
                                 MovePlayer(touch, false);
                             }
@@ -179,7 +179,7 @@ public class PlayerControll : MonoBehaviour {
                 }
             }
         }
-        else
+        else if(side == 1)
         {
             //same as above
             if (rightPlayers[rightCounter].GetComponent<Animator>().isActiveAndEnabled)
