@@ -4,7 +4,6 @@ using System.Collections;
 public class ShapeController : MonoBehaviour
 {
     public GameObject shadow;
-    public GameObject canvas;
 
     public GameObject[] destroyAnimation;
 
@@ -83,7 +82,6 @@ public class ShapeController : MonoBehaviour
             if (other.transform.tag == "wallObject")
         {
             Time.timeScale = 0;
-            canvas.SetActive(true);
             Destroy(gameObject);
         }
     }

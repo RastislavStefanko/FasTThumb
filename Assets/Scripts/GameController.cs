@@ -21,7 +21,15 @@ public class GameController : MonoBehaviour {
 
     public Text playerName;
 
-    private bool end = false;
+    public Text[] highScoresTexts;
+
+    public GameObject canvas;
+
+    private string name;
+    private int tmpNumber;
+    private TouchScreenKeyboard keyBoard;
+
+    private int end = 0;
 
     // Use this for initialization
     void Start()
@@ -40,36 +48,62 @@ public class GameController : MonoBehaviour {
                 score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
                 leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
             }
+            else
+            {
+                end++;
+            }
+
             if (rightPlayers[i] != null)
             {
                 score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
                 rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            }else
+            {
+                end++;
             }
         }
 
         scoreText.text = "" + score;
 
-        for (int i = 0; i < leftPlayers.Length; i++)
+        if (end == 1)
         {
-            if (leftPlayers[i] == null)
+            //on defeat check high score, if new rewrite actual
+            canvas.SetActive(true);
+            highScoresTexts[1].text = "" + score;
+            for(int i =0; i < 5; i++)
             {
-                end = true;
+                if (score >= PlayerPrefs.GetInt("highScore" + i))
+                {
+                    if (i + 1 != 5)
+                    {
+                        PlayerPrefs.SetInt("highScore" + (i + 1), PlayerPrefs.GetInt("highScore" + i));
+                        PlayerPrefs.SetString("highScoreName" + (i + 1), PlayerPrefs.GetString("highScoreName" + i));
+                    }
+                    //open keyboard
+                    keyBoard = TouchScreenKeyboard.Open(name, TouchScreenKeyboardType.Default);
+
+                    //set right text for high score
+                    highScoresTexts[0].text = "New Highscore : ";
+                    highScoresTexts[2].gameObject.SetActive(true);
+                    PlayerPrefs.SetInt("highScore" + i, score);
+                    tmpNumber = i;
+                    break;
+                }
+                else
+                {
+                    highScoresTexts[0].text = "Your score : ";
+                }
             }
-            if (rightPlayers[i] == null)
-            {
-                end = true;
-            }
+            
         }
 
-        if (end)
+        //set player name on new high score
+        if (keyBoard != null && keyBoard.done)
         {
-            TouchScreenKeyboard.Open(playerName.text, TouchScreenKeyboardType.Default);
-            finalScoreText.text = "" + score;
-            if(score >= PlayerPrefs.GetInt("highScore"))
-            {
-                PlayerPrefs.SetInt("highScore", score);
-            }
+            highScoresTexts[3].text = keyBoard.text;
+            PlayerPrefs.SetString("highScoreName" + tmpNumber, keyBoard.text);
         }
+        
     }
 
         //each spawnTime time is spawn one wall
