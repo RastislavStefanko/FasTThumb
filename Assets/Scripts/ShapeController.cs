@@ -23,7 +23,7 @@ public class ShapeController : MonoBehaviour
         //cast ray on incoming wall and translate object shadow
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            if (hit.collider.tag == "wallObject" || hit.collider.tag == "Enemy")
+            if (hit.collider.tag == "wallObject" || hit.collider.tag == "EnemyCircle" || hit.collider.tag == "EnemyCube")
             {
                 shadow.transform.position = new Vector3(transform.position.x, transform.position.y, hit.transform.position.z);
                 if (hit.distance > 30)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class SwitchScenesController : MonoBehaviour {
@@ -10,7 +11,8 @@ public class SwitchScenesController : MonoBehaviour {
     public void LoadScene(string directScene)
     {
         Time.timeScale = 1;
-        Application.LoadLevel(directScene);
+        //Application.LoadLevel(directScene); /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+        SceneManager.LoadScene(directScene);
     }
     
     public void PauseScene()

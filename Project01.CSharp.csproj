@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ColorControlBoundary.cs" />
     <Compile Include="Assets\HighScoreController.cs" />
     <Compile Include="Assets\Scripts\DestroyAfter.cs" />
     <Compile Include="Assets\Scripts\DestroyByCollison.cs" />

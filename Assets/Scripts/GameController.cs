@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject canvas;
 
-    private string name;
+   // private string name; /*//**/*/*//*****/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
     private int tmpNumber;
     private TouchScreenKeyboard keyBoard;
 
@@ -112,9 +112,22 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(startTime);
         while (true)
         {
-            //randomize side and colour
+            //randomize side and color
             side = Random.Range(0, 2);
-            color = new Color(Random.Range(0.0f,1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            //color = new Color(Random.Range(0.0f,1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            int tmpRandomInt = Random.Range(0, 3);
+            if (tmpRandomInt == 1)
+            {
+                color = new Color(1, 0, 1);
+            } else if(tmpRandomInt == 2)
+            {
+                color = new Color(1, 165f/255f, 0);
+            }
+            else
+            {
+                color = new Color(124f/255f, 252f/255f, 0);
+            }
+            
 
             //give player opposite colour to wall 
             switch (side)
