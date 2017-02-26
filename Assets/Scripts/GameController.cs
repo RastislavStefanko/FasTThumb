@@ -153,6 +153,7 @@ public class GameController : MonoBehaviour {
             Vector3 spawnPosition = new Vector3(spawnValues.x, 0, spawnValues.z);
             GameObject instantiateWall = Instantiate(wall, spawnPosition, wall.transform.rotation);
             instantiateWall.GetComponent<SpriteRenderer>().color = color;
+            spawnTime -= 0.01f;
             yield return new WaitForSeconds(spawnTime);
 
         }
