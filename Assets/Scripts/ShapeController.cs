@@ -25,7 +25,7 @@ public class ShapeController : MonoBehaviour
         {
             if (hit.collider.tag == "wallObject" || hit.collider.tag == "EnemyCircle" || hit.collider.tag == "EnemyCube")
             {
-                shadow.transform.position = new Vector3(transform.position.x, transform.position.y, hit.transform.position.z);
+                shadow.transform.position = new Vector3(transform.position.x, transform.position.y, hit.transform.position.z-0.4f);
                 if (hit.distance > 30)
                 {
                     shadow.transform.localScale = new Vector3(hit.distance / 100, hit.distance / 100, shadow.transform.localScale.z);

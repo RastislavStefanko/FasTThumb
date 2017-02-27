@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour {
 
     public GameObject canvas;
 
+    private float speedWall = -10;
+
    // private string name; /*//**/*/*//*****/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
     private int tmpNumber;
     private TouchScreenKeyboard keyBoard;
@@ -65,7 +67,7 @@ public class GameController : MonoBehaviour {
 
         scoreText.text = "" + score;
 
-        if (end == 1)
+        if (end >= 1)
         {
             //on defeat check high score, if new rewrite actual
             canvas.SetActive(true);
@@ -152,7 +154,8 @@ public class GameController : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(spawnValues.x, 0, spawnValues.z);
             GameObject instantiateWall = Instantiate(wall, spawnPosition, wall.transform.rotation);
-            instantiateWall.GetComponent<SpriteRenderer>().color = color;
+            speedWall += 0.01f;
+            instantiateWall.GetComponent<Mover>().speed = speedWall;
             spawnTime -= 0.01f;
             yield return new WaitForSeconds(spawnTime);
 
