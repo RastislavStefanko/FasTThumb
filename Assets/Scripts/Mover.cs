@@ -18,6 +18,7 @@ public class Mover : MonoBehaviour {
     void Start()
     {
         gameControl = GameObject.Find("Game Controller").GetComponent<GameController>();
+
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
@@ -37,6 +38,8 @@ public class Mover : MonoBehaviour {
                 spawnPosition = new Vector3(Random.Range(-spawnValues.x, -2), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
                 enemy = Instantiate(enemies[whichShape], spawnPosition, enemies[whichShape].transform.rotation);
                 newColor = gameControl.getColor();
+
+                //set new color object
                 enemy.GetComponent<MeshRenderer>().material.color = new Color(1 - newColor.r, 1 - newColor.g, 1 - newColor.b);
                 enemy.transform.parent = transform;
                 break;
@@ -44,6 +47,7 @@ public class Mover : MonoBehaviour {
                 spawnPosition = new Vector3(Random.Range(2, spawnValues.x), Random.Range(-spawnValues.y, spawnValues.y), transform.position.z);
                 enemy = Instantiate(enemies[whichShape], spawnPosition, enemies[whichShape].transform.rotation);
                 newColor = gameControl.getColor();
+
                 enemy.GetComponent<MeshRenderer>().material.color = new Color(1 - newColor.r, 1 - newColor.g, 1 - newColor.b);
                 enemy.transform.parent = transform;
                 break;

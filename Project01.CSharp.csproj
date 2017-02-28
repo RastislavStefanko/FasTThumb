@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ColorControlBoundary.cs" />
+    <Compile Include="Assets\DontDestroyInNewScene.cs" />
+    <Compile Include="Assets\GameSoundController.cs" />
     <Compile Include="Assets\HighScoreController.cs" />
     <Compile Include="Assets\Rotation.cs" />
     <Compile Include="Assets\Scripts\DestroyAfter.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Assets\Scripts\ShapeController.cs" />
     <Compile Include="Assets\Scripts\SwitchScenesController.cs" />
     <Compile Include="Assets\Scripts\cameraSetUp.cs" />
+    <Compile Include="Assets\SettingsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BooleanOps\Documentation\readme.txt" />

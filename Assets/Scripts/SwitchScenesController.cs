@@ -8,10 +8,10 @@ public class SwitchScenesController : MonoBehaviour {
     //public string directScene;
     public GameObject pauseCanvas;
 
+    //method for loading new scenes
     public void LoadScene(string directScene)
     {
         Time.timeScale = 1;
-        //Application.LoadLevel(directScene); /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
         SceneManager.LoadScene(directScene);
     }
     
@@ -27,6 +27,7 @@ public class SwitchScenesController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
+    //method which exits application
     public void ExitApp()
     {
         Application.Quit();

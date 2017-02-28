@@ -11,6 +11,8 @@ public class ShapeController : MonoBehaviour
 
     public string type = "";
 
+    public AudioSource destroySound;
+
     private int point = 0;
 
     void Update()
@@ -25,10 +27,11 @@ public class ShapeController : MonoBehaviour
         {
             if (hit.collider.tag == "wallObject" || hit.collider.tag == "EnemyCircle" || hit.collider.tag == "EnemyCube")
             {
+                //set shadow position with z axes offset
                 shadow.transform.position = new Vector3(transform.position.x, transform.position.y, hit.transform.position.z-0.4f);
                 if (hit.distance > 30)
                 {
-                    shadow.transform.localScale = new Vector3(hit.distance / 100, hit.distance / 100, shadow.transform.localScale.z);
+                    shadow.transform.localScale = new Vector3(hit.distance / 60, hit.distance / 60, shadow.transform.localScale.z);
                 }
             }
         }
@@ -39,6 +42,7 @@ public class ShapeController : MonoBehaviour
     {
         if(other.transform.tag == "EnemyCircle" && type == "Circle")
         {
+            destroySound.Play();
             //on destroy instantiate object with destroy animation and give him target colour
             GameObject tmp;
             if (other.transform.parent.position.x < 0)
@@ -60,6 +64,7 @@ public class ShapeController : MonoBehaviour
 
         if (other.transform.tag == "EnemyCube" && type == "Cube")
         {
+            destroySound.Play();
             //on destroy instantiate object with destroy animation and give him target colour
             GameObject tmp;
             if (other.transform.parent.position.x < 0)
@@ -81,6 +86,7 @@ public class ShapeController : MonoBehaviour
 
             if (other.transform.tag == "wallObject")
         {
+            //stop time on defeat
             Time.timeScale = 0;
             Destroy(gameObject);
         }
@@ -96,6 +102,7 @@ public class ShapeController : MonoBehaviour
         point = 0;
     }
 
+    //method for setting new object on destroy
     public void setNextShape()
     {
         nextShape.SetActive(true);

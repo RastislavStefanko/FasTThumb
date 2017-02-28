@@ -111,14 +111,6 @@ public class PlayerControll : MonoBehaviour {
                 }
             }
         }
-
-        //clamp position to boundary
-        /*transform.position = new Vector3
-        (
-            Mathf.Clamp(rb.position.x, -18.5f, 18.5f),
-            Mathf.Clamp(rb.position.y, -7.8f, 7.8f),
-            z
-        );*/
     }
 
     //moving function

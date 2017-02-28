@@ -5,14 +5,10 @@ using UnityEngine;
 public class Rotation : MonoBehaviour {
 
     public float speed = 1;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
+        //rotate objcet with speed
         transform.Rotate(Vector3.down * speed * Time.deltaTime);
     }
 }

@@ -25,9 +25,10 @@ public class GameController : MonoBehaviour {
 
     public GameObject canvas;
 
-    private float speedWall = -10;
+    public AudioSource gameOverSound;
 
-   // private string name; /*//**/*/*//*****/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+    public float speedWall = -20;
+
     private int tmpNumber;
     private TouchScreenKeyboard keyBoard;
 
@@ -43,32 +44,42 @@ public class GameController : MonoBehaviour {
     void Update () {
 
         //adding score and show in scoreText
-        for (int i = 0; i < leftPlayers.Length; i++)
-        {
-            if (leftPlayers[i] != null)
+            for (int i = 0; i < leftPlayers.Length; i++)
             {
-                score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
-                leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
-            }
-            else
-            {
-                end++;
-            }
+                if (leftPlayers[i] != null)
+                {
+                    score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
+                    leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+                }
+                else
+                {
+                if (end == 0)
+                {
+                    end++;
+                }
+                }
 
-            if (rightPlayers[i] != null)
-            {
-                score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
-                rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
-            }else
-            {
-                end++;
+                if (rightPlayers[i] != null)
+                {
+                    score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
+                    rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+                }
+                else
+                {
+                if (end == 0)
+                {
+                    end++;
+                }
+                }
             }
-        }
+        
 
         scoreText.text = "" + score;
 
-        if (end >= 1)
+        if (end > 0)
         {
+            gameOverSound.Play();
+
             //on defeat check high score, if new rewrite actual
             canvas.SetActive(true);
             highScoresTexts[1].text = "" + score;
@@ -76,13 +87,14 @@ public class GameController : MonoBehaviour {
             {
                 if (score >= PlayerPrefs.GetInt("highScore" + i))
                 {
-                    if (i + 1 != 5)
+                    //move old highscores one place down
+                    for (int j = 4; j > i; j--)
                     {
-                        PlayerPrefs.SetInt("highScore" + (i + 1), PlayerPrefs.GetInt("highScore" + i));
-                        PlayerPrefs.SetString("highScoreName" + (i + 1), PlayerPrefs.GetString("highScoreName" + i));
+                         PlayerPrefs.SetInt("highScore" + j, PlayerPrefs.GetInt("highScore" + (j - 1)));
+                         PlayerPrefs.SetString("highScoreName" + j, PlayerPrefs.GetString("highScoreName" + (j - 1)));
                     }
                     //open keyboard
-                    keyBoard = TouchScreenKeyboard.Open(name, TouchScreenKeyboardType.Default);
+                    keyBoard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
 
                     //set right text for high score
                     highScoresTexts[0].text = "New Highscore : ";
@@ -96,6 +108,7 @@ public class GameController : MonoBehaviour {
                     highScoresTexts[0].text = "Your score : ";
                 }
             }
+            end = -1;
             
         }
 
@@ -154,9 +167,19 @@ public class GameController : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(spawnValues.x, 0, spawnValues.z);
             GameObject instantiateWall = Instantiate(wall, spawnPosition, wall.transform.rotation);
-            speedWall += 0.01f;
+
+            // change speed of coming wall every wave until speed of 45
+            if (speedWall > -45)
+            {
+                speedWall -= 0.5f;
+            }
             instantiateWall.GetComponent<Mover>().speed = speedWall;
-            spawnTime -= 0.01f;
+
+            //change spawn time of every wave
+            if (spawnTime >= 2)
+            {
+                spawnTime -= 0.05f;
+            }
             yield return new WaitForSeconds(spawnTime);
 
         }
