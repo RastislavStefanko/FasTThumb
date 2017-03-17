@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
-    public GameObject wall;
+    public GameObject[] wall;
     public Vector3 spawnValues;
     public float spawnTime;
     public float startTime;
@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour {
     private TouchScreenKeyboard keyBoard;
 
     private int end = 0;
+    public GameObject destroyWall;
 
     // Use this for initialization
     void Start()
@@ -44,39 +45,30 @@ public class GameController : MonoBehaviour {
     void Update () {
 
         //adding score and show in scoreText
-            for (int i = 0; i < leftPlayers.Length; i++)
+        for (int i = 0; i < leftPlayers.Length; i++)
+        {
+            if (leftPlayers[i] != null)
             {
-                if (leftPlayers[i] != null)
-                {
-                    score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
-                    leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
-                }
-                else
-                {
-                if (end == 0)
-                {
-                    end++;
-                }
-                }
-
-                if (rightPlayers[i] != null)
-                {
-                    score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
-                    rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
-                }
-                else
-                {
-                if (end == 0)
-                {
-                    end++;
-                }
-                }
+                score += leftPlayers[i].GetComponent<ShapeController>().getPoints();
+                leftPlayers[i].GetComponent<ShapeController>().setPointsToZero();
             }
-        
+
+            if (rightPlayers[i] != null)
+            {
+                score += rightPlayers[i].GetComponent<ShapeController>().getPoints();
+                rightPlayers[i].GetComponent<ShapeController>().setPointsToZero();
+            }
+
+        }
+
+        if (end < 3 && end >= 0)
+        {
+            end = destroyWall.GetComponent<OnWallDestroy>().end;
+        }
 
         scoreText.text = "" + score;
 
-        if (end > 0)
+        if (end > 2)
         {
             gameOverSound.Play();
 
@@ -121,7 +113,7 @@ public class GameController : MonoBehaviour {
         
     }
 
-        //each spawnTime time is spawn one wall
+        //each spawnTime time is spawn one enemy
         IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(startTime);
@@ -129,7 +121,7 @@ public class GameController : MonoBehaviour {
         {
             //randomize side and color
             side = Random.Range(0, 2);
-            //color = new Color(Random.Range(0.0f,1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            color = new Color(Random.Range(0.0f,1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
             int tmpRandomInt = Random.Range(0, 3);
             if (tmpRandomInt == 1)
             {
@@ -144,31 +136,40 @@ public class GameController : MonoBehaviour {
             }
             
 
-            //give player opposite colour to wall 
+            //give player opposite colour to enemy
             switch (side)
             {
                 case 0:
-                    spawnValues.x = -16;
+                    spawnValues.x = Random.Range(-spawnValues.x, -2);
                     for(int i = 0; i < leftPlayers.Length; i++)
                     {
-                        leftPlayers[i].GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                        foreach (Transform child in leftPlayers[i].transform)
+                        {
+                            child.GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                        }
+                        
                     }
                     break;
                 case 1:
-                    spawnValues.x = 16;
+                    spawnValues.x = Random.Range(2, spawnValues.x);
                     for (int i = 0; i < rightPlayers.Length; i++)
                     {
-                        rightPlayers[i].GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                        foreach (Transform child in rightPlayers[i].transform)
+                        {
+                            child.GetComponent<MeshRenderer>().material.color = new Color(1 - color.r, 1 - color.g, 1 - color.b);
+                        }
                     }
                     break;
                 default:
                     break;
             }
 
-            Vector3 spawnPosition = new Vector3(spawnValues.x, 0, spawnValues.z);
-            GameObject instantiateWall = Instantiate(wall, spawnPosition, wall.transform.rotation);
+            //spawn enemy at different position
+            Vector3 spawnPosition = new Vector3(spawnValues.x, Random.Range(-spawnValues.y, spawnValues.y), spawnValues.z);
+            GameObject instantiateWall = Instantiate(wall[Random.Range(0,wall.Length)], spawnPosition, Quaternion.identity);
+            instantiateWall.GetComponent<MeshRenderer>().material.color = color;
 
-            // change speed of coming wall every wave until speed of 45
+            // change speed of coming enemy every wave until speed of 45
             if (speedWall > -45)
             {
                 speedWall -= 0.5f;

@@ -21,6 +21,11 @@ public class PlayerControll : MonoBehaviour {
 
     private int layer = 1 << 10;
 
+    public float offsetY = 0;
+    public float offsetX = 0;
+
+    public GameObject lol;
+
     void FixedUpdate()
     {
         //iteration through touches
@@ -31,8 +36,8 @@ public class PlayerControll : MonoBehaviour {
             {
                 touch1Duration += Time.deltaTime;
 
-                Ray ray1 = new Ray(Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 17)), Vector3.back * 1000);
-                Debug.DrawRay(Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 17)), Vector3.back * 1000, Color.yellow);
+                Ray ray1 = new Ray(Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z)), Vector3.back * 1000);
+                Debug.DrawRay(Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z)), Vector3.back * 1000, Color.yellow);
 
                 //touch phases
                 if (touch.phase == TouchPhase.Began)
@@ -121,16 +126,17 @@ public class PlayerControll : MonoBehaviour {
         {
             if (leftPlayers[0] != null && leftPlayers[1] != null)
             {
-                leftPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
-                leftPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+                leftPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x + offsetX, touch.position.y, z));
+                leftPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x + offsetX, touch.position.y, z));
             }
         }
         else
         {
+
             if (rightPlayers[0] != null && rightPlayers[1] != null)
             {
-                rightPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
-                rightPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, z));
+                rightPlayers[0].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x - offsetX, touch.position.y, z));
+                rightPlayers[1].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x - offsetX, touch.position.y, z));
             }
         }
     }
@@ -163,7 +169,7 @@ public class PlayerControll : MonoBehaviour {
 
         if (side == 0)
         {
-            //check if animator is ready, and play animation which on its end set new shape active
+            //check if animator is ready, and play animation, on its end set new shape active
             if (leftPlayers[leftCounter].GetComponent<Animator>().isActiveAndEnabled)
             {
                 leftPlayers[leftCounter].GetComponent<Animator>().SetBool("changeShape", true);

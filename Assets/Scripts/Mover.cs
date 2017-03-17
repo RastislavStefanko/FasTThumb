@@ -17,12 +17,12 @@ public class Mover : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        gameControl = GameObject.Find("Game Controller").GetComponent<GameController>();
+        //gameControl = GameObject.Find("Game Controller").GetComponent<GameController>();
 
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
-        right = gameControl.getSide();
+        /*right = gameControl.getSide();
 
         //instantiate enemy on different position and with different colour
         int whichShape = Random.Range(0, enemies.Length);
@@ -53,6 +53,6 @@ public class Mover : MonoBehaviour {
                 break;
             default:
                 break;
-        }
+        }*/
     }
 }
