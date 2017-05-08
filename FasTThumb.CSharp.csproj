@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ParticleColor.cs" />
+    <Compile Include="Assets\PlayerBoundaryControll.cs" />
     <Compile Include="Assets\Scripts\ColorControlBoundary.cs" />
     <Compile Include="Assets\Scripts\DestroyAfter.cs" />
     <Compile Include="Assets\Scripts\DestroyByCollison.cs" />
@@ -85,10 +87,13 @@
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\OnWallDestroy.cs" />
     <Compile Include="Assets\Scripts\PlayerControll.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\CollisionDetector.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\ShapeController.cs" />
     <Compile Include="Assets\Scripts\Rotation.cs" />
     <Compile Include="Assets\Scripts\SettingsController.cs" />
-    <Compile Include="Assets\Scripts\ShapeController.cs" />
     <Compile Include="Assets\Scripts\SwitchScenesController.cs" />
+    <Compile Include="Assets\SideController.cs" />
+    <Compile Include="Assets\TargetRotation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
